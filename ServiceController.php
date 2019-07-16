@@ -1,7 +1,7 @@
 <?php
-require_once("Clients.php");
-require_once("Links.php");
-require_once("Sections.php");
+require_once("Client.php");
+require_once("Link.php");
+require_once("Section.php");
 
 
 /*
@@ -9,12 +9,12 @@ controls services URL mapping
 */
 
 $class = "";
-if(isset($_GET["class"]))
-    $class = $_GET["class"];
+if(isset($_POST["class"]))
+    $class = $_POST["class"];
 
 $action = "";
-if(isset($_GET["action"]))
-    $action = $_GET["action"];
+if(isset($_POST["action"]))
+    $action = $_POST["action"];
 
 switch($action){
 
@@ -25,12 +25,12 @@ switch($action){
 
     case "update":
         $class = new ucfirst($class);
-        $class->update($_GET["id"]);
+        $class->update($_POST["id"]);
         break;
 
     case "delete" :
         $class = new ucfirst($class);
-        $class->delete($_GET["id"]);
+        $class->delete($_POST["id"]);
         break;
 }
 ?>

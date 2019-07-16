@@ -1,7 +1,7 @@
 <?php
 require_once('cfg/Db.php');
 
-class Sections
+class Section
 {
 
     public function create()
@@ -37,7 +37,7 @@ class Sections
         }
     }
 
-    public function delete($id, $client_id="")
+    public function delete($id)
     {
         $pdo = DB::getConnect();
         $sql = "DELETE FROM sections WHERE section_idx = :section_idx INNER JOIN links USING(section_idx)";

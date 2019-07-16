@@ -1,17 +1,17 @@
 <?php
 require_once('cfg/Db.php');
 
-class Clients
+class Link
 {
 
     public function create()
     {
         $pdo = DB::getConnect();
-        $sql = "INSERT INTO clients (client_name)
+        $sql = "INSERT INTO links (link_name)
             VALUES(:name)";
         $stmt = $pdo->prepare($sql);
         $inserted = $stmt->execute([
-            ":client_name" => $_POST["name"],
+            ":client_name" => $_POST["client_name"],
         ]);
 
         if ($inserted != 0) {
@@ -23,7 +23,7 @@ class Clients
     public function update($id)
     {
         $pdo = DB::getConnect();
-        $sql = "UPDATE clients SET client_name = :client_name WHERE client_idx = :client_idx";
+        $sql = "UPDATE links SET link_name = :link_name WHERE link_idx = :link_idx";
         $stmt = $pdo->prepare($sql);
         $edited = $stmt->execute([
             ":client_idx" => $id,
@@ -40,10 +40,10 @@ class Clients
     public function delete($id)
     {
         $pdo = DB::getConnect();
-        $sql = "DELETE FROM clients WHERE client_idx = :client_idx INNER JOIN sections USING(client_idx)";
+        $sql = "DELETE FROM links WHERE link_idx = :link_idx";
         $stmt = $pdo->prepare($sql);
         $deleted = $stmt->execute([
-            ":id" => $id
+            ":link_idx" => $id
         ]);
 
         if ($deleted != 0) {
