@@ -13,8 +13,8 @@ if(isset($_POST["class"]))
     $class = $_POST["class"];
 
 $action = "";
-if(isset($_POST["action"]))
-    $action = $_POST["action"];
+if(isset($_GET["action"]))
+    $action = $_GET["action"];
 
 switch($action){
 
