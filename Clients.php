@@ -4,7 +4,7 @@ require_once('cfg/Db.php');
 class Clients
 {
 
-    public function createClient()
+    public function create()
     {
         $pdo = DB::getConnect();
         $sql = "INSERT INTO clients (client_name)
@@ -16,11 +16,11 @@ class Clients
 
         if ($inserted != 0) {
             $inserted = array('success' => 1);
-            return $inserted;
+            return json_encode($inserted);
         }
     }
 
-    public function updateClient($id)
+    public function update($id)
     {
         $pdo = DB::getConnect();
         $sql = "UPDATE clients SET client_name = :client_name WHERE client_idx = :client_idx";
@@ -33,14 +33,14 @@ class Clients
 
         if ($edited != 0) {
             $edited = array('success' => 1);
-            return $edited;
+            return json_encode($edited);
         }
     }
 
-    public function deleteClient($id)
+    public function delete($id)
     {
         $pdo = DB::getConnect();
-        $sql = "DELETE FROM clients WHERE client_idx = :client_idx";
+        $sql = "DELETE FROM clients WHERE client_idx = :client_idx INNER JOIN sections USING(client_idx)";
         $stmt = $pdo->prepare($sql);
         $deleted = $stmt->execute([
             ":id" => $id
@@ -48,7 +48,7 @@ class Clients
 
         if ($deleted != 0) {
             $deleted = array('success' => 1);
-            return $deleted;
+            return json_encode($deleted);
         }
     }
 

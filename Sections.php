@@ -4,7 +4,7 @@ require_once('cfg/Db.php');
 class Sections
 {
 
-    public function createSection()
+    public function create()
     {
         $pdo = DB::getConnect();
         $sql = "INSERT INTO sections (section_name)
@@ -16,11 +16,11 @@ class Sections
 
         if ($inserted != 0) {
             $inserted = array('success' => 1);
-            return $inserted;
+            return json_encode($inserted);
         }
     }
 
-    public function updateSection($id)
+    public function update($id)
     {
         $pdo = DB::getConnect();
         $sql = "UPDATE sections SET section_name = :section_name WHERE client_idx = :client_idx";
@@ -33,14 +33,14 @@ class Sections
 
         if ($edited != 0) {
             $edited = array('success' => 1);
-            return $edited;
+            return json_encode($edited);
         }
     }
 
-    public function deleteSection($id, $client_id="")
+    public function delete($id, $client_id="")
     {
         $pdo = DB::getConnect();
-        $sql = "DELETE FROM sections WHERE client_idx = :client_idx";
+        $sql = "DELETE FROM sections WHERE section_idx = :section_idx INNER JOIN links USING(section_idx)";
         $stmt = $pdo->prepare($sql);
         $deleted = $stmt->execute([
             ":id" => $id
@@ -48,7 +48,7 @@ class Sections
 
         if ($deleted != 0) {
             $deleted = array('success' => 1);
-            return $deleted;
+            return json_encode($deleted);
         }
     }
 

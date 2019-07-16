@@ -4,7 +4,7 @@ require_once('cfg/Db.php');
 class Links
 {
 
-    public function createLink()
+    public function create()
     {
         $pdo = DB::getConnect();
         $sql = "INSERT INTO links (link_name)
@@ -16,11 +16,11 @@ class Links
 
         if ($inserted != 0) {
             $inserted = array('success' => 1);
-            return $inserted;
+            return json_encode($inserted);
         }
     }
 
-    public function updateLink($id)
+    public function update($id)
     {
         $pdo = DB::getConnect();
         $sql = "UPDATE links SET link_name = :link_name WHERE link_idx = :link_idx";
@@ -33,11 +33,11 @@ class Links
 
         if ($edited != 0) {
             $edited = array('success' => 1);
-            return $edited;
+            return json_encode($edited);
         }
     }
 
-    public function deleteLink($id)
+    public function delete($id)
     {
         $pdo = DB::getConnect();
         $sql = "DELETE FROM links WHERE link_idx = :link_idx";
@@ -48,7 +48,7 @@ class Links
 
         if ($deleted != 0) {
             $deleted = array('success' => 1);
-            return $deleted;
+            return json_encode($deleted);
         }
     }
 
